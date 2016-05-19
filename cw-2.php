@@ -75,6 +75,42 @@ try {
         if (!$this->describing) throw new Exception("Failed Test");
       }
     }
+
+    /* Assertion Methods */
+    public function assert_equals($actual, $expected, $msg = "Actual value did not match expected") {
+      $this->expect($actual === $expected, "$msg - Expected: " . $this->display($expected) . ", but instead got: " . $this->display($actual));
+    }
+    public function assert_not_equals($actual, $expected, $msg = "Incorrect value returned") {
+      $this->expect($actual !== $expected, "$msg - Algorithm should not have returned: " . $this->display($expected));
+    }
+
+    /* Helper Methods (not accessible externally) */
+    protected function check_similar($actual, $expected) {
+      if (!is_array($expected) || !is_array($actual)) return $actual === $expected;
+      foreach ($expected as $key => $value) {
+        if (!$this->check_similar($actual[$key], $expected[$key])) return false;
+      }
+      foreach ($actual as $key => $value) {
+        if (!$this->check_similar($actual[$key], $expected[$key])) return false;
+      }
+      return true;
+    }
+    protected function display($value) {
+      if ($value === true) return "true";
+      if ($value === false) return "false";
+      if ($value === NULL) return "NULL";
+      if (is_string($value)) return '"' . htmlspecialchars($value) . '"';
+      if (!is_array($value)) return $value;
+      if (count($value) === 0) return "array()";
+      $result = "array(";
+      $result .= "<div style='margin-left:20px'>";
+      $result .= implode(",<br />", array_map(function ($key, $val) {
+        return $this->display($key) . " => " . $this->display($val);
+      }, array_keys($value), $value));
+      $result .= "</div>";
+      $result .= ")";
+      return $result;
+    }
   }
   $test = new Test;
 } catch (Exception $e) {
