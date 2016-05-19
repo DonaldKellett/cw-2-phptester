@@ -10,6 +10,9 @@ try {
     /* Ensures a "describe" block is not nested in another.  Cannot be modified externally. */
     protected $describing = false;
 
+    /* Class constant for random token generation */
+    const token_chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+
     /* Describes the tests to be executed.  Wraps the test output in <DESCRIBE::> and <COMPLETEDIN::> */
     public function describe($msg, $fn) {
       /* If describing message is empty or not defined, set a default message */
@@ -114,6 +117,19 @@ try {
       } finally {
         $this->expect($error_not_thrown, $msg);
       }
+    }
+
+    /* Random Output Methods */
+    public function random_number() {
+      return rand(0, 100);
+    }
+    public function random_token() {
+      $length = rand(8, 10);
+      $token = "";
+      for ($i = 0; $i < $length; $i++) {
+        $token .= str_split(Test::token_chars)[floor(lcg_value() * strlen(Test::token_chars))];
+      }
+      return $token;
     }
 
     /* Helper Methods (not accessible externally) */

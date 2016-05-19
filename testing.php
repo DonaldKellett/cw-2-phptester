@@ -80,5 +80,14 @@ $test->describe("The CW-specific PHP testing framework", function () {
     $test->assert_not_similar(["hello" => "world", "eat" => "food", "drink" => "water"], ["hello" => "world", "eat" => "food", "drink" => "water"]);
     $test->assert_not_similar([[1], [2, 3], [4, [5, [6], 7], 8], 9, ["final" => 10]], [[1], [2, 3], [4, [5, [6], 7], 8], 9, ["final" => 10]]);
   });
+  $test->it("should have a working random number and random token generator", function () {
+    global $test;
+    for ($i = 0; $i < 1000; $i++) {
+      echo $test->random_number() . "<br />\n";
+    }
+    for ($i = 0; $i < 1000; $i++) {
+      echo $test->random_token() . "<br />\n";
+    }
+  });
 });
 ?>
