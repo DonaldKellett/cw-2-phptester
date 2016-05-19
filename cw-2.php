@@ -90,6 +90,32 @@ try {
       $this->expect(!$this->check_similar($actual, $expected), "$msg - Algorithm should not have returned: " . $this->display($expected));
     }
 
+    /* Error-Handling Methods */
+    public function expect_error($msg, $fn) {
+      /* Default Message */
+      if (!$msg) $msg = "Expected error was not thrown";
+      $error_thrown = false;
+      try {
+        $fn();
+      } catch (Exception $e) {
+        $error_thrown = true;
+      } finally {
+        $this->expect($error_thrown, $msg);
+      }
+    }
+    public function expect_no_error($msg, $fn) {
+      /* Default Message */
+      if (!$msg) $msg = "Unexpected error was thrown";
+      $error_not_thrown = true;
+      try {
+        $fn();
+      } catch (Exception $e) {
+        $error_not_thrown = false;
+      } finally {
+        $this->expect($error_not_thrown, $msg);
+      }
+    }
+
     /* Helper Methods (not accessible externally) */
     protected function check_similar($actual, $expected) {
       if (!is_array($expected) || !is_array($actual)) return $actual === $expected;
