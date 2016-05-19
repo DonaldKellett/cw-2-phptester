@@ -43,6 +43,8 @@ try {
         if ($this->fails > 0) throw new Exception("Failed Tests");
       }
     }
+
+    /* "It" blocks */
     public function it($msg, $fn) {
       /* If message is blank, set default message */
       if (!$msg) $msg = "should pass all tests below";
@@ -56,6 +58,18 @@ try {
         $fn();
       } catch (Exception $e) {
         echo "<ERROR::>$e\n";
+      }
+    }
+
+    /* Basic Test Method */
+    public function expect($passed, $msg = "Value was not what was expected") {
+      if ($passed) {
+        $this->passes++;
+        echo "<PASSED::>Test Passed\n";
+      } else {
+        $this->fails++;
+        echo "<FAILED::>$msg\n";
+        if (!$this->describing) throw new Exception("Failed Test");
       }
     }
   }
