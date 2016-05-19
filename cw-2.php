@@ -83,6 +83,12 @@ try {
     public function assert_not_equals($actual, $expected, $msg = "Incorrect value returned") {
       $this->expect($actual !== $expected, "$msg - Algorithm should not have returned: " . $this->display($expected));
     }
+    public function assert_similar($actual, $expected, $msg = "Actual value did not match expected") {
+      $this->expect($this->check_similar($actual, $expected), "$msg - Expected: " . $this->display($expected) . ", but instead got: " . $this->display($actual));
+    }
+    public function assert_not_similar($actual, $expected, $msg = "Incorrect value returned") {
+      $this->expect(!$this->check_similar($actual, $expected), "$msg - Algorithm should not have returned: " . $this->display($expected));
+    }
 
     /* Helper Methods (not accessible externally) */
     protected function check_similar($actual, $expected) {
