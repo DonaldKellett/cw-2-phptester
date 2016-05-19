@@ -58,6 +58,9 @@ try {
         $fn();
       } catch (Exception $e) {
         echo "<ERROR::>$e\n";
+      } finally {
+        /* Terminate current "it" block - almost forgot :o */
+        echo "<COMPLETEDIN::>\n";
       }
     }
 
