@@ -43,6 +43,21 @@ try {
         if ($this->fails > 0) throw new Exception("Failed Tests");
       }
     }
+    public function it($msg, $fn) {
+      /* If message is blank, set default message */
+      if (!$msg) $msg = "should pass all tests below";
+
+      /* "if" blocks must be nested within "describe" blocks */
+      if (!$this->describing) throw new Exception("\"if\" blocks must be called within \"describe\" blocks");
+
+      /* Format "it" block */
+      echo "<IT::>$msg\n";
+      try {
+        $fn();
+      } catch (Exception $e) {
+        echo "<ERROR::>$e\n";
+      }
+    }
   }
   $test = new Test;
 } catch (Exception $e) {
