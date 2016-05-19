@@ -15,5 +15,57 @@ $test->describe(NULL, function () {
     $test->expect(true);
     $test->expect(false);
   });
+  $test->it(NULL, function () {
+    global $test;
+    $test->expect(true);
+    $test->expect(false);
+    $test->expect(true);
+    $test->expect(false);
+    $test->expect(true);
+    $test->expect(false);
+    $test->expect(true);
+    $test->expect(false);
+    $test->expect(true);
+    $test->expect(false);
+  });
+  $test->it(NULL, function () {
+    global $test;
+    $test->expect(true);
+    $test->expect(false);
+    $test->expect(true);
+    $test->expect(false);
+    $test->expect(true);
+    $test->expect(false);
+    $test->expect(true);
+    $test->expect(false);
+    $test->expect(true);
+    $test->expect(false);
+  });
+  $test->it(NULL, function () {
+    global $test;
+    $test->expect(true);
+    $test->expect(false);
+    $test->expect(true);
+    $test->expect(false);
+    $test->expect(true);
+    $test->expect(false);
+    $test->expect(true);
+    $test->expect(false);
+    $test->expect(true);
+    $test->expect(false);
+  });
+  $test->it(NULL, function () {
+    global $test;
+    $test->expect(true);
+    $test->expect(false);
+    $test->expect(true);
+    $test->expect(false);
+    $test->expect(true);
+    $test->expect(false);
+    $test->expect(true);
+    $test->expect(false);
+    $test->expect(true);
+    $test->expect(false);
+  });
 });
 ?>
